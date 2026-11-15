@@ -127,9 +127,12 @@ export function ItemsPage() {
       )}
 
       {!sorting && (
-        <Link to="/items/new" className="fab" aria-label={de.items.new}>
-          <PlusIcon />
-        </Link>
+        <>
+          <div className="fab-spacer" />
+          <Link to="/items/new" className="fab" aria-label={de.items.new}>
+            <PlusIcon />
+          </Link>
+        </>
       )}
     </Page>
   );

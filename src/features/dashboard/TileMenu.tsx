@@ -51,6 +51,13 @@ export function TileMenu({ item, stats, onRecord, onClose }: Props) {
         <button
           type="button"
           className="btn secondary"
+          onClick={() => navigate(`/history?item=${item.id}`)}
+        >
+          🕓 {de.tileMenu.history}
+        </button>
+        <button
+          type="button"
+          className="btn secondary"
           onClick={() => navigate(`/items/${item.id}`)}
         >
           ✏️ {de.tileMenu.edit}

@@ -1,0 +1,46 @@
+/* ---------- Verlauf ---------- */
+
+.history-day {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.history-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.entry-row {
+  width: 100%;
+  min-height: 56px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.entry-row:active {
+  background: var(--surface-2);
+}
+
+.entry-time {
+  flex: none;
+  width: 44px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.item-icon.small {
+  width: 28px;
+  font-size: 1.3rem;
+}
+
+.entry-values {
+  color: var(--text-muted);
+  font-weight: 400;
+}

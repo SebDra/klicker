@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HistoryIcon } from '../../app/icons';
 import { Page } from '../../app/Layout';
 import { Toast } from '../../components/Toast';
 import { db } from '../../db/db';
@@ -11,7 +12,7 @@ import { formatValues } from '../../domain/entry';
 import { displayName } from '../../domain/item';
 import { useToday } from '../../hooks/useToday';
 import { de } from '../../i18n/de';
-import { EntrySheet } from './EntrySheet';
+import { EntrySheet } from '../entries/EntrySheet';
 import { Tile } from './Tile';
 import { TileMenu } from './TileMenu';
 
@@ -85,8 +86,14 @@ export function DashboardPage() {
     </div>
   );
 
+  const historyLink = (
+    <Link to="/history" className="icon-btn" aria-label={de.history.title} title={de.history.title}>
+      <HistoryIcon />
+    </Link>
+  );
+
   return (
-    <Page title={de.nav.dashboard}>
+    <Page title={de.nav.dashboard} actions={historyLink}>
       {data.items.length === 0 ? (
         <div className="empty-state">
           <div className="emoji" aria-hidden>

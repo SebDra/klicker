@@ -1,5 +1,5 @@
 import { LIMITS, type Entry, type Item } from '../db/types';
-import { formatDecimal, parseDecimal } from './number';
+import { formatDecimal, parseDecimal, toInputString } from './number';
 import { fromDateTimeLocal, toDateTimeLocal } from './time';
 
 export interface EntryForm {
@@ -62,18 +62,27 @@ const round = (v: number, decimals: number) => {
   return Math.round(v * f) / f;
 };
 
+/** Formular zum Bearbeiten eines bestehenden Eintrags. */
+export function entryToForm(item: Item, entry: Entry): EntryForm {
+  const values: Record<string, string> = {};
+  for (const f of item.fields) values[f.key] = toInputString(entry.values?.[f.key]);
+  return { values, when: toDateTimeLocal(entry.timestamp), note: entry.note ?? '' };
+}
+
 /**
  * Wandelt ein gültiges Formular in Eintragsdaten um. Werte werden auf die
- * konfigurierten Nachkommastellen gerundet. Liegt der gewählte Zeitpunkt in der
- * aktuellen Minute, wird die exakte Uhrzeit `now` verwendet.
+ * konfigurierten Nachkommastellen gerundet. Bleibt die Minute unverändert, wird die
+ * sekundengenaue Zeit beibehalten: beim Bearbeiten `originalTimestamp`, sonst `now`.
  */
 export function entryFormToData(
   item: Item,
   form: EntryForm,
   now: number,
+  originalTimestamp?: number,
 ): Pick<Entry, 'timestamp' | 'values' | 'note'> {
   const ts = fromDateTimeLocal(form.when) ?? now;
-  const timestamp = form.when === toDateTimeLocal(now) ? now : ts;
+  const reference = originalTimestamp ?? now;
+  const timestamp = form.when === toDateTimeLocal(reference) ? reference : ts;
 
   let values: Record<string, number> | undefined;
   if (item.type === 'value') {
@@ -85,6 +94,23 @@ export function entryFormToData(
   }
   const note = form.note.trim() || undefined;
   return { timestamp, values, note };
+}
+
+/**
+ * Beim Bearbeiten: Werte von inzwischen entfernten Feldern bleiben erhalten,
+ * die aktuellen Felder werden durch die neuen Werte ersetzt.
+ */
+export function mergeValues(
+  item: Item,
+  oldValues: Record<string, number> | undefined,
+  newValues: Record<string, number> | undefined,
+): Record<string, number> | undefined {
+  if (item.type !== 'value') return undefined;
+  const current = new Set(item.fields.map((f) => f.key));
+  const orphans = Object.fromEntries(
+    Object.entries(oldValues ?? {}).filter(([k]) => !current.has(k)),
+  );
+  return { ...orphans, ...newValues };
 }
 
 /**

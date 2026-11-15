@@ -1,6 +1,7 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 import { ChartPage } from '../features/chart/ChartPage';
 import { DashboardPage } from '../features/dashboard/DashboardPage';
+import { HistoryPage } from '../features/history/HistoryPage';
 import { ItemEditPage } from '../features/items/ItemEditPage';
 import { ItemsPage } from '../features/items/ItemsPage';
 import { SettingsPage } from '../features/settings/SettingsPage';
@@ -17,6 +18,7 @@ export function App() {
           <Route path="items" element={<ItemsPage />} />
           <Route path="items/new" element={<ItemEditPage />} />
           <Route path="items/:id" element={<ItemEditPage />} />
+          <Route path="history" element={<HistoryPage />} />
           <Route path="chart" element={<ChartPage />} />
           <Route path="settings" element={<SettingsPage />} />
           <Route

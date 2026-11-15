@@ -1,6 +1,6 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useState, type FormEvent } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Page } from '../../app/Layout';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { EmojiPicker } from '../../components/EmojiPicker';
@@ -202,7 +202,9 @@ function ItemFormView({ item, initial }: { item?: Item; initial: ItemForm }) {
           <section className="field">
             <h2 className="section-title">{de.itemForm.manage}</h2>
             <div className="card stack">
-              <p className="hint">{de.itemForm.entries(entryCount)}</p>
+              <Link to={`/history?item=${item.id}`} className="btn secondary">
+                🕓 {de.tileMenu.history} ({de.itemForm.entries(entryCount)})
+              </Link>
               <button type="button" className="btn secondary" onClick={() => void toggleArchive()}>
                 {item.archived ? de.itemForm.restore : de.itemForm.archive}
               </button>

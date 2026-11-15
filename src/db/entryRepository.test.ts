@@ -1,7 +1,14 @@
 import { emptyForm, formToDraft } from '../domain/item';
 import { DAY_MS } from '../domain/time';
 import { KlickerDB } from './db';
-import { addEntry, deleteEntry, lastEntryOf, loadItemStats } from './entryRepository';
+import {
+  addEntry,
+  deleteEntry,
+  lastEntryOf,
+  listEntries,
+  loadItemStats,
+  updateEntry,
+} from './entryRepository';
 import { createItem } from './itemRepository';
 
 let db: KlickerDB;
@@ -33,6 +40,32 @@ describe('entryRepository', () => {
     await addEntry({ itemId: 'x', timestamp: hoursAgo(30) }, db); // nachgetragen
     await addEntry({ itemId: 'y', timestamp: now }, db);
     expect((await lastEntryOf('x', db))?.timestamp).toBe(hoursAgo(1));
+  });
+
+  it('aktualisiert Einträge und entfernt geleerte Notizen', async () => {
+    const e = await addEntry({ itemId: 'x', timestamp: now, note: 'alt', values: { a: 1 } }, db);
+    await updateEntry(e.id, { timestamp: hoursAgo(2), values: { a: 2 }, note: undefined }, db);
+    const saved = await db.entries.get(e.id);
+    expect(saved).toMatchObject({
+      timestamp: hoursAgo(2),
+      values: { a: 2 },
+      createdAt: e.createdAt,
+    });
+    expect(saved).not.toHaveProperty('note');
+  });
+
+  it('listet neueste zuerst, filtert nach Item und meldet weitere Seiten', async () => {
+    for (let h = 0; h < 5; h++) await addEntry({ itemId: 'x', timestamp: hoursAgo(h) }, db);
+    await addEntry({ itemId: 'y', timestamp: hoursAgo(0.5) }, db);
+
+    const all = await listEntries({ limit: 3 }, db);
+    expect(all.entries.map((e) => e.timestamp)).toEqual([now, hoursAgo(0.5), hoursAgo(1)]);
+    expect(all.hasMore).toBe(true);
+
+    const onlyX = await listEntries({ itemId: 'x', limit: 10 }, db);
+    expect(onlyX.entries).toHaveLength(5);
+    expect(onlyX.entries.every((e) => e.itemId === 'x')).toBe(true);
+    expect(onlyX.hasMore).toBe(false);
   });
 
   it('berechnet Tages-, Gesamt- und Nutzungszahlen', async () => {

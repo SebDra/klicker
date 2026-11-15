@@ -82,7 +82,9 @@ describe('Item-Verwaltung', () => {
     await db.entries.add({ id: 'e1', itemId: item.id, timestamp: 1, createdAt: 1 });
     renderAt(`#/items/${item.id}`);
 
-    expect(await screen.findByText('1 Eintrag')).toBeInTheDocument();
+    expect(
+      await screen.findByRole('link', { name: /Verlauf anzeigen \(1 Eintrag\)/ }),
+    ).toHaveAttribute('href', `#/history?item=${item.id}`);
     // Art ist gesperrt, weil schon Einträge existieren
     expect(screen.getByRole('radio', { name: /Wert/ })).toBeDisabled();
 

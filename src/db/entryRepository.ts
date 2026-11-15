@@ -20,6 +20,40 @@ export async function deleteEntry(id: string, db: KlickerDB = defaultDb): Promis
   await db.entries.delete(id);
 }
 
+/** Ändert Zeitpunkt, Werte und Notiz; `undefined` entfernt Werte bzw. Notiz. */
+export async function updateEntry(
+  id: string,
+  patch: Pick<Entry, 'timestamp' | 'values' | 'note'>,
+  db: KlickerDB = defaultDb,
+): Promise<void> {
+  const existing = await db.entries.get(id);
+  if (!existing) throw new Error(`Eintrag ${id} nicht gefunden`);
+  const next: Entry = { ...existing, ...patch };
+  if (next.values === undefined) delete next.values;
+  if (next.note === undefined) delete next.note;
+  await db.entries.put(next);
+}
+
+/**
+ * Neueste Einträge zuerst, optional nur eines Items, höchstens `limit` Stück.
+ * `hasMore` gibt an, ob es ältere Einträge gibt (dafür wird einer mehr gelesen).
+ */
+export async function listEntries(
+  opts: { itemId?: string; limit: number },
+  db: KlickerDB = defaultDb,
+): Promise<{ entries: Entry[]; hasMore: boolean }> {
+  const query = opts.itemId
+    ? db.entries
+        .where('[itemId+timestamp]')
+        .between([opts.itemId, Dexie.minKey], [opts.itemId, Dexie.maxKey])
+    : db.entries.orderBy('timestamp');
+  const rows = await query
+    .reverse()
+    .limit(opts.limit + 1)
+    .toArray();
+  return { entries: rows.slice(0, opts.limit), hasMore: rows.length > opts.limit };
+}
+
 /** Neuester Eintrag eines Items (nach Zeitpunkt, nicht nach Erfassung). */
 export function lastEntryOf(itemId: string, db: KlickerDB = defaultDb): Promise<Entry | undefined> {
   return db.entries

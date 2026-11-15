@@ -1,7 +1,7 @@
 # Klicker – Projektplan
 
 Stand: 15.11.2026 · Status: M0 (Setup), M1 (Datenlayer, Item-Verwaltung) und M2 (Dashboard, Erfassung) abgeschlossen,
-als Nächstes M3 (Verlauf)
+M3 (Verlauf) abgeschlossen, als Nächstes M4 (Diagramm)
 
 Abweichung in M1: Die Item-Sortierung erfolgt über einen Sortiermodus mit ↑/↓-Buttons statt
 Drag & Drop (zuverlässiger mit Touch-Bedienung und Screenreadern).
