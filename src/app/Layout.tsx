@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Link, NavLink, Outlet } from 'react-router-dom';
 import { de } from '../i18n/de';
-import { ChartIcon, DashboardIcon, ItemsIcon, SettingsIcon } from './icons';
+import { BackIcon, ChartIcon, DashboardIcon, ItemsIcon, SettingsIcon } from './icons';
 
 const navItems: { to: string; label: string; icon: ReactNode }[] = [
   { to: '/', label: de.nav.dashboard, icon: <DashboardIcon /> },
@@ -26,12 +26,27 @@ export function Layout() {
   );
 }
 
+interface PageProps {
+  title: string;
+  /** Pfad für den Zurück-Pfeil in der Kopfzeile. */
+  back?: string;
+  /** Aktionen rechts in der Kopfzeile. */
+  actions?: ReactNode;
+  children: ReactNode;
+}
+
 /** Seitenrahmen: Kopfzeile mit Titel + scrollbarer Inhalt. */
-export function Page({ title, children }: { title: string; children: ReactNode }) {
+export function Page({ title, back, actions, children }: PageProps) {
   return (
     <>
       <header className="app-header">
+        {back && (
+          <Link to={back} className="icon-btn header-back" aria-label={de.common.back}>
+            <BackIcon />
+          </Link>
+        )}
         <h1>{title}</h1>
+        {actions && <div className="header-actions">{actions}</div>}
       </header>
       <main className="app-main">{children}</main>
     </>

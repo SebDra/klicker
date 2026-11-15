@@ -34,6 +34,42 @@ export const ChartIcon = () => (
   </svg>
 );
 
+export const BackIcon = () => (
+  <svg {...base}>
+    <path d="M15 18l-6-6 6-6" />
+  </svg>
+);
+
+export const PlusIcon = () => (
+  <svg {...base}>
+    <path d="M12 5v14M5 12h14" />
+  </svg>
+);
+
+export const ChevronRightIcon = () => (
+  <svg {...base}>
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+);
+
+export const ArrowUpIcon = () => (
+  <svg {...base}>
+    <path d="M12 19V5M5 12l7-7 7 7" />
+  </svg>
+);
+
+export const ArrowDownIcon = () => (
+  <svg {...base}>
+    <path d="M12 5v14M19 12l-7 7-7-7" />
+  </svg>
+);
+
+export const CloseIcon = () => (
+  <svg {...base}>
+    <path d="M18 6L6 18M6 6l12 12" />
+  </svg>
+);
+
 export const SettingsIcon = () => (
   <svg {...base}>
     <circle cx="12" cy="12" r="3" />

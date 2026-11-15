@@ -1,6 +1,9 @@
 # Klicker – Projektplan
 
-Stand: 15.11.2026 · Status: M0 (Setup) abgeschlossen, als Nächstes M1
+Stand: 15.11.2026 · Status: M0 (Setup) und M1 (Datenlayer, Item-Verwaltung) abgeschlossen, als Nächstes M2
+
+Abweichung in M1: Die Item-Sortierung erfolgt über einen Sortiermodus mit ↑/↓-Buttons statt
+Drag & Drop (zuverlässiger mit Touch-Bedienung und Screenreadern).
 
 ## 1. Ziel
 
