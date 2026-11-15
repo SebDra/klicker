@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "klicker-preview",
+      "runtimeExecutable": "C:\\Program Files\\nodejs\\npm.cmd",
+      "runtimeArgs": ["run", "build-and-preview"],
+      "port": 4173
+    }
+  ]
+}
