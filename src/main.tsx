@@ -6,6 +6,7 @@ import './styles/global.css';
 import './styles/components.css';
 import './styles/dashboard.css';
 import './styles/history.css';
+import './styles/chart.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

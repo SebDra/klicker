@@ -1,0 +1,105 @@
+/* ---------- Diagramm ---------- */
+
+.chart-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip[aria-pressed='true'] {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, var(--surface));
+  font-weight: 600;
+}
+
+.segmented button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.chart-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+  padding: 14px 10px 10px 14px;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.chart-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.swatch {
+  display: inline-block;
+  flex: none;
+}
+
+.swatch.bar {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.swatch.line {
+  width: 14px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.echart {
+  width: 100%;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 4px;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.data-table th,
+.data-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+  white-space: nowrap;
+}
+
+.data-table th[scope='row'],
+.data-table thead th:first-child {
+  text-align: left;
+  font-weight: 400;
+}
+
+.data-table thead th {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.data-table td {
+  font-variant-numeric: tabular-nums;
+}

@@ -1,7 +1,7 @@
 # Klicker – Projektplan
 
-Stand: 15.11.2026 · Status: M0 (Setup), M1 (Datenlayer, Item-Verwaltung) und M2 (Dashboard, Erfassung) abgeschlossen,
-M3 (Verlauf) abgeschlossen, als Nächstes M4 (Diagramm)
+Stand: 15.11.2026 · Status: M0–M4 abgeschlossen (Setup, Item-Verwaltung, Dashboard, Verlauf,
+Diagramm), als Nächstes M5 (Einstellungen, Export/Import)
 
 Abweichung in M1: Die Item-Sortierung erfolgt über einen Sortiermodus mit ↑/↓-Buttons statt
 Drag & Drop (zuverlässiger mit Touch-Bedienung und Screenreadern).
@@ -13,6 +13,13 @@ Präzisierungen in M2:
 - Wert-Items: mindestens ein Feld muss ausgefüllt sein, Werte werden auf die Nachkommastellen gerundet.
 - Rückdatieren/Notiz bei Zähler-Items über langes Drücken → „Mit Zeitpunkt / Notiz erfassen“.
 
+Abweichung in M4: Statt eines Diagramms mit zwei Y-Achsen gibt es **ein Diagramm je Einheit**
+untereinander mit gemeinsamer Zeitachse (zwei Skalen in einem Bild suggerieren Zusammenhänge,
+die nicht existieren). Dadurch entfällt auch die Grenze von zwei Einheiten. Weitere Details:
+höchstens 8 Datenreihen (feste, farbfehlsichtigkeitsgeprüfte Palette; jede Reihe behält ihre
+Farbe), Tabellenansicht zuschaltbar, Einteilungen mit mehr als 400 Abschnitten gesperrt,
+letzte Auswahl wird gespeichert, ohne gespeicherte Auswahl sind die Favoriten vorausgewählt.
+
 ## 1. Ziel
 
 Mobile Web-App (Android/iOS) zum schnellen Erfassen von Ereignissen und Messwerten für frei
@@ -22,22 +29,22 @@ lokal auf dem Gerät.
 
 ## 2. Getroffene Entscheidungen
 
-| Thema        | Entscheidung                                                                                                                                                    |
-| ------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Plattform    | Installierbare PWA, kein App Store                                                                                                                              |
-| Framework    | React + TypeScript, Build mit Vite                                                                                                                              |
-| Speicherung  | IndexedDB über Dexie.js, kein Backend                                                                                                                           |
-| Offline      | Service Worker (vite-plugin-pwa / Workbox)                                                                                                                      |
-| Reset        | Automatisch um 00:00, pro Item ein- oder ausschaltbar                                                                                                           |
-| Zählschritt  | Immer +1, mit Rückgängig-Toast nach jeder Aktivierung                                                                                                           |
-| Werte        | Mehrere Zahlenfelder pro Item (z. B. Sys/Dia/Puls) mit Einheit, Min/Max und Nachkommastellen                                                                    |
-| Eintrag      | Optionale Notiz; Zeitpunkt ist mit „jetzt“ vorbelegt und kann rückdatiert werden                                                                                |
-| Meistgenutzt | Top 8 nach Anzahl der Einträge in den letzten 14 Tagen, ohne Favoriten                                                                                          |
-| Diagramm     | Ein Diagramm mit bis zu 2 Y-Achsen (nach Einheit); Zähler als Balken (Summe pro Zeitabschnitt), Werte als Linie (Mittelwert pro Abschnitt, Min/Max zuschaltbar) |
-| Icons        | Nur Emojis                                                                                                                                                      |
-| Sicherheit   | Vorerst keine PIN oder Verschlüsselung                                                                                                                          |
-| Sprache      | Nur Deutsch (Texte trotzdem zentral ablegen)                                                                                                                    |
-| Backup       | Export/Import als JSON (komplett) und CSV (Einträge)                                                                                                            |
+| Thema        | Entscheidung                                                                                                                                                |
+| ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Plattform    | Installierbare PWA, kein App Store                                                                                                                          |
+| Framework    | React + TypeScript, Build mit Vite                                                                                                                          |
+| Speicherung  | IndexedDB über Dexie.js, kein Backend                                                                                                                       |
+| Offline      | Service Worker (vite-plugin-pwa / Workbox)                                                                                                                  |
+| Reset        | Automatisch um 00:00, pro Item ein- oder ausschaltbar                                                                                                       |
+| Zählschritt  | Immer +1, mit Rückgängig-Toast nach jeder Aktivierung                                                                                                       |
+| Werte        | Mehrere Zahlenfelder pro Item (z. B. Sys/Dia/Puls) mit Einheit, Min/Max und Nachkommastellen                                                                |
+| Eintrag      | Optionale Notiz; Zeitpunkt ist mit „jetzt“ vorbelegt und kann rückdatiert werden                                                                            |
+| Meistgenutzt | Top 8 nach Anzahl der Einträge in den letzten 14 Tagen, ohne Favoriten                                                                                      |
+| Diagramm     | Ein Diagramm je Einheit (siehe Abweichung M4); Zähler als Balken (Summe pro Zeitabschnitt), Werte als Linie (Mittelwert pro Abschnitt, Min/Max zuschaltbar) |
+| Icons        | Nur Emojis                                                                                                                                                  |
+| Sicherheit   | Vorerst keine PIN oder Verschlüsselung                                                                                                                      |
+| Sprache      | Nur Deutsch (Texte trotzdem zentral ablegen)                                                                                                                |
+| Backup       | Export/Import als JSON (komplett) und CSV (Einträge)                                                                                                        |
 
 ## 3. Voraussetzungen (Entwicklungsrechner)
 

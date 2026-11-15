@@ -9,6 +9,10 @@ export default defineConfig({
   define: {
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version ?? '0.0.0'),
   },
+  build: {
+    // Die Diagramm-Seite (ECharts) ist ein eigener, nachgeladener Block von ~560 kB.
+    chunkSizeWarningLimit: 600,
+  },
   plugins: [
     react(),
     VitePWA({
