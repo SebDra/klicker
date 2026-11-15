@@ -1,7 +1,8 @@
 # Klicker – Projektplan
 
 Stand: 15.11.2026 · Status: M0–M5 abgeschlossen (Setup, Item-Verwaltung, Dashboard, Verlauf,
-Diagramm, Einstellungen/Backup), als Nächstes M6 (Gerätetests, Deployment)
+Diagramm, Einstellungen/Backup). M6 vorbereitet: CI mit E2E-Tests, Pages-Deployment
+(abschaltbar), Gerätetest-Checkliste; offen: Hosting-Entscheidung und Tests auf echten Geräten
 
 Abweichung in M1: Die Item-Sortierung erfolgt über einen Sortiermodus mit ↑/↓-Buttons statt
 Drag & Drop (zuverlässiger mit Touch-Bedienung und Screenreadern).

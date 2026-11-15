@@ -1,6 +1,12 @@
 import { defineConfig, devices } from '@playwright/test';
 
+// Lokal: installiertes Chrome nutzen (kein Browser-Download nötig; abschaltbar mit PW_CHANNEL=).
+// In CI: die von Playwright mitgelieferten Browser inkl. WebKit für das iOS-Profil.
+const channel = process.env.CI ? undefined : (process.env.PW_CHANNEL ?? 'chrome');
+const local = channel ? { browserName: 'chromium' as const, channel } : {};
+
 // E2E-Tests gegen den Produktions-Build (inkl. Service Worker), auf Android- und iOS-Profilen.
+// Hinweis: Lokal emuliert das iOS-Profil nur Bildschirm/User-Agent in Chrome, nicht Safari.
 export default defineConfig({
   testDir: './tests/e2e',
   fullyParallel: true,
@@ -14,8 +20,8 @@ export default defineConfig({
     timezoneId: 'Europe/Berlin',
   },
   projects: [
-    { name: 'android', use: { ...devices['Pixel 7'] } },
-    { name: 'ios', use: { ...devices['iPhone 14'] } },
+    { name: 'android', use: { ...devices['Pixel 7'], ...local } },
+    { name: 'ios', use: { ...devices['iPhone 14'], ...local } },
   ],
   webServer: {
     command: 'npm run build && npm run preview',
