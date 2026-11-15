@@ -1,5 +1,7 @@
 # Klicker
 
+**App:** <https://sebdra.github.io/klicker/>
+
 Offline-PWA zum Zählen und Erfassen von Werten für frei konfigurierbare Items.
 Alle Daten bleiben lokal auf dem Gerät (IndexedDB). Details und Meilensteine: [PLAN.md](PLAN.md).
 

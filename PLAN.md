@@ -1,8 +1,9 @@
 # Klicker – Projektplan
 
 Stand: 15.11.2026 · Status: M0–M5 abgeschlossen (Setup, Item-Verwaltung, Dashboard, Verlauf,
-Diagramm, Einstellungen/Backup). M6 vorbereitet: CI mit E2E-Tests, Pages-Deployment
-(abschaltbar), Gerätetest-Checkliste; offen: Hosting-Entscheidung und Tests auf echten Geräten
+Diagramm, Einstellungen/Backup). M6: CI mit E2E-Tests (Chromium + WebKit) und automatischem
+Deployment auf https://sebdra.github.io/klicker/ läuft; offen: Tests auf echten Geräten
+(docs/GERAETETEST.md)
 
 Abweichung in M1: Die Item-Sortierung erfolgt über einen Sortiermodus mit ↑/↓-Buttons statt
 Drag & Drop (zuverlässiger mit Touch-Bedienung und Screenreadern).
