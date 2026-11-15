@@ -172,6 +172,67 @@ export const de = {
   settings: {
     storageNote: 'Alle Daten werden ausschließlich lokal auf diesem Gerät gespeichert.',
     version: 'Version',
+    appearance: 'Darstellung',
+    themes: { system: 'System', light: 'Hell', dark: 'Dunkel' },
+    backup: 'Datensicherung',
+    backupWhy:
+      'Die Daten liegen nur auf diesem Gerät. Ein Backup schützt vor Verlust, z. B. beim Gerätewechsel.',
+    lastBackup: (when: string) => `Letztes Backup: ${when}`,
+    neverBackedUp: 'Noch kein Backup erstellt.',
+    exportJson: 'Backup speichern (JSON)',
+    exportCsv: 'Einträge als CSV (Excel)',
+    importJson: 'Backup einspielen …',
+    exported: 'Backup gespeichert',
+    exportedCsv: 'CSV gespeichert',
+    importTitle: 'Backup einspielen?',
+    importSummary: (items: number, entries: number, date: string) =>
+      `Die Datei enthält ${items} Items und ${entries} Einträge${date ? ` (erstellt ${date})` : ''}.`,
+    importMode: 'Vorgehen',
+    importReplace: 'Ersetzen',
+    importReplaceHint: (items: number, entries: number) =>
+      `Alle aktuellen Daten (${items} Items, ${entries} Einträge) werden gelöscht und durch das Backup ersetzt.`,
+    importMerge: 'Zusammenführen',
+    importMergeHint:
+      'Vorhandene Daten bleiben erhalten. Gleiche Items/Einträge werden durch die Version aus dem Backup ersetzt.',
+    importConfirm: 'Einspielen',
+    imported: (items: number, entries: number) =>
+      `Backup eingespielt: ${items} Items, ${entries} Einträge`,
+    importFailed: 'Import fehlgeschlagen',
+    storage: 'Speicher',
+    counts: (items: number, entries: number) => `${items} Items · ${entries} Einträge`,
+    usage: (used: string) => `Belegt: ${used}`,
+    persisted: 'Dauerhafter Speicher aktiv – der Browser löscht die Daten nicht von selbst.',
+    notPersisted:
+      'Dauerhafter Speicher nicht aktiv – der Browser könnte Daten bei Platzmangel oder längerer Nichtnutzung löschen.',
+    persistUnknown: 'Dieser Browser meldet keinen Speicherstatus.',
+    requestPersist: 'Dauerhaften Speicher anfordern',
+    persistDenied:
+      'Der Browser hat abgelehnt. Installiere die App auf dem Startbildschirm und versuche es erneut.',
+    install: 'App installieren',
+    installed: 'Klicker läuft als installierte App.',
+    installButton: 'Zum Startbildschirm hinzufügen',
+    installIOS:
+      'Tippe in Safari auf „Teilen“ (Quadrat mit Pfeil) und dann auf „Zum Home-Bildschirm“. Wichtig: Auf iPhone/iPad sind die Daten nur als installierte App dauerhaft sicher.',
+    installOther:
+      'Öffne das Browser-Menü (⋮) und wähle „App installieren“ bzw. „Zum Startbildschirm hinzufügen“.',
+    danger: 'Daten löschen',
+    deleteAll: 'Alle Daten löschen',
+    deleteAllTitle: 'Wirklich alle Daten löschen?',
+    deleteAllText: (items: number, entries: number) =>
+      `Alle ${items} Items und ${entries} Einträge werden endgültig von diesem Gerät gelöscht. Das kann nicht rückgängig gemacht werden. Erstelle vorher ein Backup, wenn du die Daten behalten möchtest.`,
+    deleteAllConfirm: 'Endgültig löschen',
+    deletedAll: 'Alle Daten gelöscht',
+    about: 'Über Klicker',
+  },
+  reminder: {
+    install:
+      'Installiere Klicker auf dem Startbildschirm, damit deine Daten dauerhaft gespeichert bleiben.',
+    backup: (days: number | null) =>
+      days === null
+        ? 'Du hast noch kein Backup deiner Daten erstellt.'
+        : `Dein letztes Backup ist ${days} Tage alt.`,
+    action: 'Ansehen',
+    later: 'Später',
   },
   pwa: {
     updateAvailable: 'Eine neue Version ist verfügbar.',

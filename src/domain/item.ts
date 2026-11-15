@@ -62,7 +62,8 @@ export function emptyForm(): ItemForm {
 
 export function newField(partial: Partial<Omit<FieldForm, 'key'>> = {}): FieldForm {
   return {
-    key: newId().slice(0, 8),
+    // Mit Buchstaben beginnen: rein numerische Schlüssel sortiert JavaScript in Objekten um.
+    key: `f${newId().slice(0, 7)}`,
     name: '',
     unit: '',
     min: '',

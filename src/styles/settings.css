@@ -1,0 +1,54 @@
+/* ---------- Einstellungen ---------- */
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.settings .card p {
+  margin: 0;
+}
+
+.warn {
+  font-size: 0.9rem;
+}
+
+label.btn.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+label.btn:focus-within {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- Hinweisbanner (Dashboard) ---------- */
+
+.banner {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--accent) 8%, var(--surface));
+}
+
+.banner p {
+  margin: 0;
+}
+
+.banner-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}

@@ -13,6 +13,7 @@ import { displayName } from '../../domain/item';
 import { useToday } from '../../hooks/useToday';
 import { de } from '../../i18n/de';
 import { EntrySheet } from '../entries/EntrySheet';
+import { ReminderBanner } from './ReminderBanner';
 import { Tile } from './Tile';
 import { TileMenu } from './TileMenu';
 
@@ -25,7 +26,8 @@ interface ToastState {
 async function loadDashboard(now: number) {
   const items = (await db.items.toArray()).filter((i) => !i.archived);
   const stats = await loadItemStats(items, now);
-  return { items, stats, now };
+  const entryCount = await db.entries.count();
+  return { items, stats, now, entryCount };
 }
 
 export function DashboardPage() {
@@ -107,6 +109,7 @@ export function DashboardPage() {
         </div>
       ) : (
         <>
+          <ReminderBanner entries={data.entryCount} />
           <p className="sr-only">{de.dashboard.tileHint}</p>
           {favorites.length > 0 && (
             <section className="dash-section" aria-label={de.dashboard.favorites}>

@@ -76,7 +76,8 @@ describe('Dashboard', () => {
       await screen.findByRole('button', { name: /^Blutdruck: 120 \/ 80 \/ 65 heute/ }),
     ).toBeVisible();
     const [entry] = await db.entries.toArray();
-    expect(Object.values(entry!.values!)).toEqual([120, 80, 65]);
+    const [item] = await db.items.toArray();
+    expect(item!.fields.map((f) => entry!.values![f.key])).toEqual([120, 80, 65]);
   });
 
   it('öffnet bei langem Drücken das Menü und erfasst rückdatiert mit Notiz', async () => {
