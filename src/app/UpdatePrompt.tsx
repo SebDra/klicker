@@ -17,7 +17,8 @@ export function UpdatePrompt() {
   };
 
   return (
-    <div className="toast" role="status">
+    // Oben anzeigen, damit es nicht mit den Rückgängig-Hinweisen unten kollidiert.
+    <div className="toast toast-top" role="status">
       <span>{needRefresh ? de.pwa.updateAvailable : de.pwa.offlineReady}</span>
       {needRefresh && (
         <button className="primary" onClick={() => void updateServiceWorker(true)}>

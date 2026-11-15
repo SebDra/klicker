@@ -46,6 +46,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    // Feste Zeitzone, damit Tagesgrenzen und Sommerzeit-Tests reproduzierbar sind.
+    env: { TZ: 'Europe/Berlin' },
     include: ['src/**/*.test.{ts,tsx}'],
   },
 });

@@ -12,6 +12,7 @@ interface Props {
   placeholder?: string;
   required?: boolean;
   inputMode?: InputHTMLAttributes<HTMLInputElement>['inputMode'];
+  autoFocus?: boolean;
   className?: string;
 }
 
@@ -26,6 +27,7 @@ export function TextField({
   placeholder,
   required,
   inputMode,
+  autoFocus,
   className,
 }: Props) {
   const id = useId();
@@ -37,6 +39,7 @@ export function TextField({
     placeholder,
     maxLength,
     required,
+    autoFocus,
     'aria-invalid': !!error || undefined,
     'aria-describedby': error || hint ? msgId : undefined,
   };

@@ -53,4 +53,5 @@ export const LIMITS = {
   unit: 12,
   maxFields: 6,
   maxDecimals: 3,
+  note: 500,
 } as const;

@@ -1,9 +1,17 @@
 # Klicker – Projektplan
 
-Stand: 15.11.2026 · Status: M0 (Setup) und M1 (Datenlayer, Item-Verwaltung) abgeschlossen, als Nächstes M2
+Stand: 15.11.2026 · Status: M0 (Setup), M1 (Datenlayer, Item-Verwaltung) und M2 (Dashboard, Erfassung) abgeschlossen,
+als Nächstes M3 (Verlauf)
 
 Abweichung in M1: Die Item-Sortierung erfolgt über einen Sortiermodus mit ↑/↓-Buttons statt
 Drag & Drop (zuverlässiger mit Touch-Bedienung und Screenreadern).
+
+Präzisierungen in M2:
+
+- „Meistgenutzt“ zeigt nur Items mit Nutzung in den letzten 14 Tagen. Alle übrigen aktiven Items
+  stehen unter „Weitere Items“ (eingeklappt; ausgeklappt, solange es weder Favoriten noch Nutzung gibt).
+- Wert-Items: mindestens ein Feld muss ausgefüllt sein, Werte werden auf die Nachkommastellen gerundet.
+- Rückdatieren/Notiz bei Zähler-Items über langes Drücken → „Mit Zeitpunkt / Notiz erfassen“.
 
 ## 1. Ziel
 

@@ -87,10 +87,13 @@ describe('Item-Verwaltung', () => {
     expect(screen.getByRole('radio', { name: /Wert/ })).toBeDisabled();
 
     await user.click(screen.getByRole('button', { name: 'Archivieren' }));
-    await waitFor(async () => expect((await db.items.get(item.id))?.archived).toBe(true));
+    // Erst die Rücknavigation zur Liste abwarten, sonst überholt sie den folgenden Seitenwechsel.
+    await screen.findByRole('heading', { name: 'Items' });
+    expect((await db.items.get(item.id))?.archived).toBe(true);
 
     window.location.hash = `#/items/${item.id}`;
-    await user.click(await screen.findByRole('button', { name: 'Löschen' }));
+    await screen.findByRole('button', { name: 'Wiederherstellen' });
+    await user.click(screen.getByRole('button', { name: 'Löschen' }));
     const dialog = screen.getByRole('alertdialog');
     expect(within(dialog).getByText(/sein Eintrag/)).toBeInTheDocument();
     await user.click(within(dialog).getByRole('button', { name: 'Endgültig löschen' }));
