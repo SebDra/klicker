@@ -35,7 +35,8 @@ export function Tile({ item, stats, now, onActivate, onMenu }: Props) {
   return (
     <button
       type="button"
-      className={`tile tile-${item.type}`}
+      className="tile"
+      data-type={item.type}
       aria-label={`${name}: ${value} ${meta}`}
       {...press}
     >
