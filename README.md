@@ -22,7 +22,8 @@ Alle Daten bleiben lokal auf dem Gerät (IndexedDB). Details und Meilensteine: [
 | `npm run test:e2e` | Playwright-Tests (Android- und iOS-Profil); lokal mit installiertem Chrome |
 | `npm run format`   | Code mit Prettier formatieren                                              |
 
-E2E lokal ohne Chrome: `PW_CHANNEL=` setzen und einmalig `npx playwright install chromium webkit`.
+E2E mit den Playwright-Browsern (inkl. WebKit = Safari-Engine für das iOS-Profil):
+einmalig `npx playwright install chromium webkit`, dann mit `PW_CHANNEL=bundled` starten.
 
 App-Icons neu erzeugen: `powershell -ExecutionPolicy Bypass -File scripts/generate-icons.ps1`
 

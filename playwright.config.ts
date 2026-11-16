@@ -1,8 +1,9 @@
 import { defineConfig, devices } from '@playwright/test';
 
-// Lokal: installiertes Chrome nutzen (kein Browser-Download nötig; abschaltbar mit PW_CHANNEL=).
-// In CI: die von Playwright mitgelieferten Browser inkl. WebKit für das iOS-Profil.
-const channel = process.env.CI ? undefined : (process.env.PW_CHANNEL ?? 'chrome');
+// Lokal: installiertes Chrome nutzen (kein Browser-Download nötig).
+// PW_CHANNEL=bundled bzw. CI: die von Playwright mitgelieferten Browser inkl. WebKit (iOS-Profil).
+const requested = process.env.PW_CHANNEL ?? 'chrome';
+const channel = process.env.CI || requested === 'bundled' ? undefined : requested;
 const local = channel ? { browserName: 'chromium' as const, channel } : {};
 
 // E2E-Tests gegen den Produktions-Build (inkl. Service Worker), auf Android- und iOS-Profilen.

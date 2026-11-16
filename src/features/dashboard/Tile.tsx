@@ -39,15 +39,17 @@ export function Tile({ item, stats, now, onActivate, onMenu }: Props) {
       aria-label={`${name}: ${value} ${meta}`}
       {...press}
     >
-      <span className="tile-icon" aria-hidden>
-        {item.icon}
-      </span>
-      <span className="tile-name">{name}</span>
-      <span className={`tile-value${value.length > 5 ? ' long' : ''}`} aria-hidden>
-        {value}
-      </span>
-      <span className="tile-meta" aria-hidden>
-        {meta}
+      <span className="tile-body">
+        <span className="tile-icon" aria-hidden>
+          {item.icon}
+        </span>
+        <span className="tile-name">{name}</span>
+        <span className={`tile-value${value.length > 5 ? ' long' : ''}`} aria-hidden>
+          {value}
+        </span>
+        <span className="tile-meta" aria-hidden>
+          {meta}
+        </span>
       </span>
     </button>
   );

@@ -27,8 +27,6 @@ export const de = {
     mostUsed: 'Meistgenutzt',
     mostUsedHint: 'letzte 14 Tage',
     others: 'Weitere Items',
-    showOthers: (n: number) => `Weitere Items anzeigen (${n})`,
-    hideOthers: 'Weitere Items ausblenden',
     today: 'heute',
     total: 'gesamt',
     noValue: 'noch kein Wert',

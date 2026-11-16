@@ -109,21 +109,26 @@ describe('Dashboard', () => {
     expect(screen.getByRole('button', { name: /^Kaffee: 0 heute/ })).toBeVisible();
   });
 
-  it('zeigt Items ohne Favorit/Nutzung direkt, sonst eingeklappt', async () => {
+  it('zeigt alle Favoriten und alle weiteren Items', async () => {
     const user = userEvent.setup();
-    await make({ name: 'Eins' });
-    await make({ name: 'Zwei' });
+    for (const name of ['F1', 'F2', 'F3', 'F4', 'F5']) await make({ name, favorite: true });
+    for (const name of ['W1', 'W2', 'W3', 'W4']) await make({ name });
     renderDashboard();
 
-    // Neue Nutzer: alles sichtbar
-    expect(await screen.findByRole('button', { name: /^Eins: 0/ })).toBeVisible();
-    await user.click(screen.getByRole('button', { name: /^Zwei: 0/ }));
+    const favs = await screen.findByRole('region', { name: 'Favoriten' });
+    expect(within(favs).getAllByRole('button')).toHaveLength(5);
+    const others = screen.getByRole('region', { name: 'Weitere Items' });
+    expect(within(others).getAllByRole('button')).toHaveLength(4);
 
-    // Jetzt ist „Zwei“ meistgenutzt, „Eins“ unter „Weitere“ eingeklappt
+    // Nach Nutzung wandert „W2“ zu Meistgenutzt, die übrigen bleiben sichtbar
+    await user.click(within(others).getByRole('button', { name: /^W2: 0/ }));
     const most = await screen.findByRole('region', { name: 'Meistgenutzt' });
-    expect(within(most).getByRole('button', { name: /^Zwei: 1/ })).toBeVisible();
-    expect(screen.queryByRole('button', { name: /^Eins: 0/ })).not.toBeInTheDocument();
-    await user.click(screen.getByRole('button', { name: 'Weitere Items anzeigen (1)' }));
-    expect(screen.getByRole('button', { name: /^Eins: 0/ })).toBeVisible();
+    expect(within(most).getByRole('button', { name: /^W2: 1/ })).toBeVisible();
+    const rest = screen.getByRole('region', { name: 'Weitere Items' });
+    expect(
+      within(rest)
+        .getAllByRole('button')
+        .map((b) => b.getAttribute('aria-label')),
+    ).toEqual(['W1: 0 heute', 'W3: 0 heute', 'W4: 0 heute']);
   });
 });

@@ -37,7 +37,6 @@ export function DashboardPage() {
   const [menuItem, setMenuItem] = useState<Item | null>(null);
   const [entryItem, setEntryItem] = useState<Item | null>(null);
   const [toast, setToast] = useState<ToastState | null>(null);
-  const [showOthers, setShowOthers] = useState(false);
 
   const statsOf = (item: Item): ItemStats => data?.stats.get(item.id) ?? EMPTY_STATS;
   const notify = (message: string, entryId?: string) =>
@@ -70,8 +69,6 @@ export function DashboardPage() {
   if (!data) return <Page title={de.nav.dashboard}>{null}</Page>;
 
   const { favorites, mostUsed, others } = buildDashboard(data.items, data.stats);
-  // Ohne Favoriten/Nutzung (z. B. neue Nutzer) gleich alle Items zeigen.
-  const othersOpen = showOthers || (favorites.length === 0 && mostUsed.length === 0);
 
   const grid = (items: Item[]) => (
     <div className="tile-grid">
@@ -127,29 +124,8 @@ export function DashboardPage() {
           )}
           {others.length > 0 && (
             <section className="dash-section" aria-label={de.dashboard.others}>
-              {othersOpen ? (
-                <>
-                  <h2 className="dash-title">{de.dashboard.others}</h2>
-                  {grid(others)}
-                  {showOthers && (
-                    <button
-                      type="button"
-                      className="btn ghost"
-                      onClick={() => setShowOthers(false)}
-                    >
-                      {de.dashboard.hideOthers}
-                    </button>
-                  )}
-                </>
-              ) : (
-                <button
-                  type="button"
-                  className="btn secondary block"
-                  onClick={() => setShowOthers(true)}
-                >
-                  {de.dashboard.showOthers(others.length)}
-                </button>
-              )}
+              <h2 className="dash-title">{de.dashboard.others}</h2>
+              {grid(others)}
             </section>
           )}
         </>
